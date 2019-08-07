@@ -1,4 +1,4 @@
-
+TEST_IMAGE ?= alpine:3.9
 
 all:
 
@@ -7,3 +7,7 @@ rights:
 
 test: rights
 	./test.sh
+
+dockertest:
+	docker run --name test_ShellTemplates -v $(PWD):/ShellTemplates -w /ShellTemplates $(TEST_IMAGE) ./test.sh
+	docker rm test_ShellTemplates

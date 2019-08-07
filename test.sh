@@ -33,3 +33,4 @@ done
 
 echo "====> SUMMARY <===="
 echo "==> $passedTestsCount/$testsCount tests passed."
+echo ""
