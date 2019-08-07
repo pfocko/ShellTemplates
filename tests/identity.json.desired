@@ -1,0 +1,9 @@
+{
+    "name": "Peter",
+    "age": 22,
+    "location": {
+        "continent": "Europe",
+        "state": "Slovakia",
+        "city": "Kosice"
+    }    
+}

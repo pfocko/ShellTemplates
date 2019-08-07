@@ -1,0 +1,9 @@
+{
+    "name": "<%$ MY_NAME $%>",
+    "age": <%$ YEARS_OLD $%>,
+    "location": {
+        "continent": "Europe",
+        "state": "Slovakia",
+        "city": "<%$ HOME_CITY $%>"
+    }    
+}
