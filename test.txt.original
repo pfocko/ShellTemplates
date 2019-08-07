@@ -1,2 +1,0 @@
-Hello <%$ FRIEND_NAME $%>.
-I`m <%$ YEARS_OLD $%> years old and I`m from <%$ HOME_CITY $%>.
