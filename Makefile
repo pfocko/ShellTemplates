@@ -8,6 +8,6 @@ rights:
 test: rights
 	./test.sh
 
-dockertest:
+dockertest: rights
 	docker run --name test_ShellTemplates -v $(PWD):/ShellTemplates -w /ShellTemplates $(TEST_IMAGE) ./test.sh
 	docker rm test_ShellTemplates
