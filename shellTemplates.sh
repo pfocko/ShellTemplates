@@ -7,7 +7,7 @@ unset awkExpr
 for envVarName in $envVarNames
 do
     eval envVarValue=\$$envVarName    
-    awkExpr=$awkExpr"sub(\"<%\\\\$ $envVarName \\\\$%>\", \"$envVarValue\"); "
+    awkExpr=$awkExpr"gsub(\"<%\\\\$ $envVarName \\\\$%>\", \"$envVarValue\");"
 done
 
 awkExpr='{'$awkExpr'print}'
