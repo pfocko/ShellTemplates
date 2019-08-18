@@ -30,4 +30,7 @@ function interpretFile {
     rm $1.tmp
 }
 
-interpretFile $1
+for file in $@
+do
+    interpretFile $file
+done

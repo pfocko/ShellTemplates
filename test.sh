@@ -1,28 +1,33 @@
 #!/bin/sh
 
 # Load environment variables
-source ./tests/env.sh
+. ./tests/env.sh
 
 echo "====> TESTING <===="
 echo ""
 
+# Get all files with '.original' extension and then remove extension
+testFiles=$(ls tests | grep ".*\.original$" | sed 's/\.original$//g')
+
 # Init info-variables
-testsCount=$(ls tests | grep ".*\.original$" | wc -l)
+testsCount=$(echo $testFiles | wc -w)
 passedTestsCount=0
 
-# Get all files with '.original' postfix
-for testFile in $(ls tests | grep ".*\.original$" | sed 's/\.original$//g')
+for testFile in $testFiles
 do
-    echo "====> Testing $testFile <===="
-
     # Create test file
-    cp tests/$testFile.original tests/$testFile
+    cp tests/$testFile.original tests/$testFile.test
+done
 
-    # Execute shellTemplates on test file
-    ./shellTemplates.sh tests/$testFile
+# Execute shellTemplates on test files
+./shellTemplates.sh $(find tests -type f -name *.test)
+
+for testFile in $testFiles
+do
+    echo "====> Testing $testFile <===="    
 
     # Compare test file with desired file
-    if cmp -s tests/$testFile tests/$testFile.desired
+    if cmp -s tests/$testFile.test tests/$testFile.desired
     then
         echo "==> SUCCESS!"
         let "passedTestsCount++"
@@ -31,13 +36,14 @@ do
         echo "==> Expected:"
         cat tests/$testFile.desired
         echo "==> Received:"
-        cat tests/$testFile
+        cat tests/$testFile.test
     fi
 
-    # Remove test file
-    rm tests/$testFile
     echo ""
 done
+
+# Remove test files
+rm $(find tests -type f -name *.test)
 
 echo "====> SUMMARY <===="
 echo "==> $passedTestsCount/$testsCount tests passed."
