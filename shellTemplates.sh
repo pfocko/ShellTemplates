@@ -16,7 +16,8 @@ awkExpr='{'$awkExpr'print}'
 
 function interpretFile {
     awk "$awkExpr" $1 > $1.tmp
-    mv $1.tmp $1
+    awk '{gsub("<%!SP!%>"," ");gsub("<%!TB!%>","\t");gsub("<%!DL!%>","$");gsub("<%!BS!%>","\\");gsub("<%!NL!%>","\n");print}' $1.tmp > $1
+    rm $1.tmp
 }
 
 interpretFile $1
