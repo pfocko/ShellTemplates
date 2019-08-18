@@ -16,15 +16,23 @@ passedTestsCount=0
 for testFile in $testFiles
 do
     # Create test file
-    cp tests/$testFile.original tests/$testFile.test
+    cp tests/$testFile.original tests/$testFile.test    
 done
 
 # Execute shellTemplates on test files
 ./shellTemplates.sh $(find tests -type f -name *.test)
+if [ $? -eq 0 ]
+then
+    echo "==> SUCCESS: shellTemplates.sh returned zero (success) code!"
+    echo ""
+else
+    echo "==> FAILURE: shellTemplates.sh returned non-zero code!"
+    echo ""
+fi
 
 for testFile in $testFiles
 do
-    echo "====> Testing $testFile <===="    
+    echo "====> Comparing $testFile <===="    
 
     # Compare test file with desired file
     if cmp -s tests/$testFile.test tests/$testFile.desired
