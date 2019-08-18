@@ -1,0 +1,4 @@
+==== Start of multiline text ====
+Hello world!
+	$ample text with \
+==== End of multiline text ====
