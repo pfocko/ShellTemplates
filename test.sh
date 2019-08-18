@@ -50,9 +50,6 @@ do
     echo ""
 done
 
-# Remove test files
-rm $(find tests -type f -name *.test)
-
 echo "====> SUMMARY <===="
 echo "==> $passedTestsCount/$testsCount tests passed."
 echo ""
